@@ -1,0 +1,35 @@
+/* 1160px of content, as in the prototype (its boxes were content-box) */
+.wrap {
+  max-width: calc(1160px + var(--tape) + 40px);
+  margin-inline: auto;
+  padding-inline: calc(var(--tape) + 20px) 20px;
+}
+
+.section {
+  padding-block: 40px 96px;
+  /* Clear of the fixed nav when reached from a nav link */
+  scroll-margin-top: 70px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-text-accent);
+}
+
+.title {
+  margin: 10px 0 14px;
+  font: 400 clamp(36px, 5.2vw, 64px)/1.05 var(--font-display);
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 58ch;
+  margin: 0 0 40px;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 559.98px) {
+  .wrap {
+    padding-inline: calc(var(--tape) + 14px) 16px;
+  }
+}

@@ -1,0 +1,63 @@
+/* --p (0 → 1) is the cut progress, set on scroll */
+.cut {
+  --p: 0;
+  position: relative;
+  height: 28px;
+  margin-top: 24px;
+}
+
+/* The dashed cutting line */
+.cut::before {
+  content: "";
+  position: absolute;
+  inset: 13px 0 auto;
+  border-top: 1.5px dashed var(--color-border-accent);
+}
+
+/* Already cut: the paper parts on a double line */
+.done {
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: calc(var(--p) * 100%);
+  height: 6px;
+  border-block: 1.5px solid var(--color-border-accent);
+  background: var(--color-bg-canvas);
+}
+
+.label {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  font-size: 11px;
+  color: var(--color-text-accent);
+}
+
+.scissors {
+  position: absolute;
+  top: 0;
+  left: calc(var(--p) * (100% - 30px));
+  width: 30px;
+  height: 28px;
+  background: var(--color-bg-canvas);
+}
+
+.scissors svg {
+  display: block;
+  width: 30px;
+  height: 28px;
+  overflow: visible;
+}
+
+.blade {
+  transform-origin: 12px 14px;
+  transition: transform 0.15s;
+}
+
+.snip .bladeA {
+  transform: rotate(-14deg);
+}
+
+.snip .bladeB {
+  transform: rotate(14deg);
+}

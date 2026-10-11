@@ -1,0 +1,238 @@
+/* Fan on the left, the chosen swatch and its card on the right; stacked below 1160px */
+.book {
+  display: grid;
+  grid-template-columns: minmax(0, 500px) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+/* Room for the open fan: the last swatch dips ~85px below the pivots, the one taken
+   out rises 36px above */
+.fan {
+  position: relative;
+  height: 380px;
+  --step: 40px;
+  --angle: 6.5deg;
+}
+
+/* Always open, wide: each swatch is both shifted right and turned on its bottom-left
+   corner, so every fabric shows a strip of at least --step to click. --i is its place
+   from the left, --z its place in the pile (the leftmost on top). */
+.swatch {
+  position: absolute;
+  left: 0;
+  bottom: 92px;
+  z-index: var(--z);
+  width: 190px;
+  height: 240px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  transform-origin: 20% 100%;
+  transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)));
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1.1),
+    opacity 0.3s;
+  clip-path: var(--pinked);
+}
+
+/* Hover or focus: pulled a little out of the fan, in front of its neighbours */
+@media (hover: hover) {
+  .swatch:hover {
+    z-index: 10;
+    transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)))
+      translateY(-14px);
+  }
+}
+
+/* The pinked clip-path cuts any outline: the focus ring goes on the tab instead */
+.swatch:focus-visible {
+  z-index: 10;
+  outline: none;
+  transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)))
+    translateY(-14px);
+}
+
+/* In the fan the colour tab runs down the right edge: the strip a swatch shows past
+   the one above it is narrow, a vertical tab always fits */
+.fan .tab {
+  left: auto;
+  right: 8px;
+  padding: 8px 4px;
+  writing-mode: vertical-rl;
+}
+
+.swatch:focus-visible .tab {
+  outline: 2px dashed var(--color-text-accent);
+  outline-offset: 2px;
+}
+
+/* The chosen swatch has left the fan: only its faded place remains, under the others
+   so it never takes their clicks. Still focusable: it holds the radio group's tab stop. */
+.fan .swatch[aria-checked="true"] {
+  z-index: 0;
+  opacity: 0.22;
+  transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)))
+    translateY(-36px);
+}
+
+/* Keyboard focus brings it up so the ring shows, faint enough not to veil the others */
+.fan .swatch[aria-checked="true"]:focus-visible {
+  z-index: 10;
+  opacity: 0.45;
+}
+
+.tab {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 4px 8px;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Fabrics, as woven: same motifs as the SVG patterns in FabricDefs */
+.washed-linen {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-illustration-blush) 0 3px,
+    var(--color-illustration-rust) 3px 12px
+  );
+}
+
+.cotton-gingham {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-illustration-violet) 45%, transparent) 50%, transparent 0) 0 0 / 16px 16px,
+    linear-gradient(color-mix(in srgb, var(--color-illustration-violet) 45%, transparent) 50%, transparent 0) 0 0 / 16px 16px,
+    var(--color-cream);
+}
+
+.silk-crepe {
+  background:
+    radial-gradient(var(--color-illustration-blush) 1.6px, transparent 2.2px) 0 0 / 14px 14px,
+    var(--color-illustration-magenta);
+}
+
+.boiled-wool {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-fabric-charcoal-twill) 0 2px,
+    var(--color-fabric-charcoal) 2px 6px
+  );
+}
+
+.linen-canvas {
+  background: repeating-linear-gradient(
+    0deg,
+    var(--color-fabric-saffron-weft) 0 1px,
+    var(--color-illustration-orange) 1px 5px
+  );
+}
+
+.cotton-voile {
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-white) 40%, transparent) 0 1px,
+    var(--color-illustration-blush) 1px 6px
+  );
+}
+
+/* The chosen swatch, large, beside the card */
+.detail {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.big {
+  position: relative;
+  width: 180px;
+  height: 232px;
+  clip-path: var(--pinked);
+  animation: land 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.1);
+}
+
+
+@keyframes land {
+  from {
+    opacity: 0;
+    transform: translate(-72px, -24px) rotate(-14deg);
+  }
+}
+
+/* Fabric details */
+.card {
+  position: relative;
+  padding: 28px;
+  background: var(--color-bg-surface);
+  box-shadow: inset 0 0 0 1.5px var(--color-border-inverse);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--color-border-accent);
+  pointer-events: none;
+}
+
+.number {
+  display: block;
+  color: var(--color-text-accent);
+}
+
+.name {
+  margin: 8px 0 16px;
+  font: 400 34px/1.1 var(--font-display);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 18px;
+  margin: 0 0 20px;
+}
+
+.facts dt {
+  color: var(--color-text-secondary);
+}
+
+.facts dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1159.98px) {
+  .book {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Phones: a smaller fan; the large swatch becomes a strip above the card */
+@media (max-width: 559.98px) {
+  .fan {
+    height: 290px;
+    --step: 24px;
+  }
+
+  .swatch {
+    bottom: 64px;
+    width: 130px;
+    height: 175px;
+  }
+
+  .detail {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .big {
+    width: 100%;
+    height: 120px;
+  }
+}

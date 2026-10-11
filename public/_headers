@@ -1,0 +1,14 @@
+# Cloudflare Pages headers (copied to out/ by the static export).
+
+# Pages and every unversioned file: revalidated on each request, so a push shows at once
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Build files under hashed names never change: cached for a year
+/_next/static/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+# The production copy on pages.dev stays out of search results: only the custom domain is indexed
+https://atelier-solas.pages.dev/*
+  X-Robots-Tag: noindex

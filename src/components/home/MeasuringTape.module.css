@@ -1,0 +1,69 @@
+/* Absolute in #site (full page height) rather than fixed + translated on scroll:
+   same look, native scrolling, no work per frame. */
+.tape {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 30;
+  width: var(--tape);
+  overflow: hidden;
+  background:
+    /* centimetres, half-centimetres, millimetres (every 2) */
+    linear-gradient(to bottom, var(--color-illustration-ink) 0 1px, transparent 1px) right top / 14px
+      var(--px-per-cm) repeat-y,
+    linear-gradient(to bottom, var(--color-illustration-ink) 0 1px, transparent 1px) right
+      calc(var(--px-per-cm) / 2) / 9px var(--px-per-cm) repeat-y,
+    linear-gradient(to bottom, rgb(29 29 27 / 0.55) 0 1px, transparent 1px) right top / 5px
+      calc(var(--px-per-cm) / 5) repeat-y,
+    var(--color-tape);
+  box-shadow:
+    2px 0 0 var(--color-illustration-ink),
+    4px 0 10px rgb(29 29 27 / 0.15);
+}
+
+.tape span {
+  position: absolute;
+  left: 3px;
+  font: 500 9px/1 var(--font-mono);
+  color: var(--color-text-primary);
+}
+
+.tape .ten {
+  color: var(--color-text-accent);
+  font-weight: 700;
+}
+
+/* Reading at mid-screen */
+.mark {
+  position: fixed;
+  left: var(--tape);
+  top: 50%;
+  z-index: 31;
+  display: flex;
+  align-items: center;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mark::before {
+  content: "";
+  margin-left: 2px;
+  border: 7px solid transparent;
+  border-left: 0;
+  border-right: 9px solid var(--color-border-accent);
+}
+
+.mark span {
+  padding: 4px 6px;
+  background: var(--color-border-accent);
+  color: var(--color-text-on-accent);
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 559.98px) {
+  .tape span {
+    left: 1px;
+    font-size: 8px;
+  }
+}

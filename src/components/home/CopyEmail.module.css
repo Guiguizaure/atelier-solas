@@ -1,0 +1,20 @@
+.line {
+  margin: 0;
+  font-size: 14px;
+}
+
+.copy {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--color-text-accent);
+  text-decoration: underline dashed;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.status {
+  margin-left: 0.5em;
+  color: var(--color-text-secondary);
+}

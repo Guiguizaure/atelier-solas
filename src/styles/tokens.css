@@ -1,0 +1,174 @@
+/*
+ * Design tokens — Figma file gm4jzMWW6jl7rZ9bPvjCL9, page « 02 · Design system ».
+ * Colors are the « Patron » mode of the Color collection (the site is one paper look,
+ * no dark mode). Names follow the Figma variable paths 1:1, so `bg/canvas` becomes
+ * `--color-bg-canvas` and the Tailwind utility `bg-bg-canvas`.
+ *
+ * Illustration tokens below the semantic ones are not Figma variables: they come from
+ * the « Déboutonné » prototype (shirt linen, buttons, tape, fabric shades).
+ *
+ * Two mono styles, one role each (never swapped case by case), both in globals.css:
+ * - `text-accent` (Figma « Accent », DM Mono 13px / 6%, uppercase): section eyebrows only.
+ * - `.mono` (prototype, DM Mono 12px / .08em, uppercase): small labels only —
+ *   measurements, tags, counters, pattern markings.
+ *
+ * Known gap with Figma: Della Respira only ships Regular; Figma display styles say 500,
+ * we render 400.
+ */
+
+@theme {
+  /* Tailwind's palette is replaced, not extended: only tokens exist. */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* ---------- Color · Patron mode ---------- */
+  --color-bg-canvas: #ede1c6;
+  --color-bg-surface: #f7f0e0;
+  --color-bg-surface-alt: #e2d2b0;
+  --color-bg-inverse: #1d1d1b;
+  --color-bg-accent: #a8321a;
+  --color-bg-accent-hover: #8e2914;
+  --color-bg-accent-soft: #ebd3c0;
+  --color-bg-success-soft: #e3e8d4;
+
+  --color-text-primary: #1d1d1b;
+  --color-text-secondary: #5e574d;
+  --color-text-tertiary: #5e574d;
+  --color-text-inverse: #f4ead8;
+  --color-text-on-accent: #f4ead8;
+  --color-text-accent: #8e2914;
+  --color-text-success: #3f5a2e;
+
+  --color-icon-primary: #1d1d1b;
+  --color-icon-secondary: #5e574d;
+  --color-icon-inverse: #f4ead8;
+  --color-icon-on-accent: #f4ead8;
+  --color-icon-accent: #a8321a;
+  --color-icon-disabled: #6f675b;
+
+  --color-accent-default: #bc3a1b;
+  --color-accent-track: #cdb88e;
+
+  --color-border-subtle: #cdb88e;
+  --color-border-strong: #6f675b;
+  --color-border-accent: #bc3a1b;
+  --color-border-inverse: #1d1d1b;
+
+  --color-illustration-rust: #bc3a1b;
+  --color-illustration-magenta: #c2306e;
+  --color-illustration-violet: #6b3fa0;
+  --color-illustration-orange: #ee7a2e;
+  --color-illustration-blush: #f2b8a0;
+  --color-illustration-ink: #1d1d1b;
+
+  /* ---------- Illustration · prototype ---------- */
+  --color-cream: #f4ead8; /* label buttons, shirt buttons, care label */
+  --color-white: #ffffff; /* voile sheen only */
+  --color-shirt-linen: #b8381a;
+  --color-shirt-stripe: #e8866a;
+  --color-shirt-weave: #8e2914;
+  --color-shirt-collar: #9e2f15;
+  --color-shirt-collar-weave: #6e1f0f;
+  --color-shirt-buttonhole: #5a1a0c;
+  --color-button-highlight: #fff8ec;
+  --color-button-shade: #d9c7a6;
+  --color-button-thread: #7a6a52;
+  --color-tape: #f4d86b;
+  --color-fabric-charcoal: #2a2926;
+  --color-fabric-charcoal-twill: #4a463f;
+  --color-fabric-saffron-weft: #d9692a;
+
+  /* ---------- Spacing ----------
+   * Figma space/N = N px. Tailwind's 4px step matches: space/16 = p-4, space/24 = p-6.
+   * The --space-* variables are for CSS modules. */
+  --spacing: 4px;
+
+  /* ---------- Radius ---------- */
+  --radius-*: initial;
+  --radius-none: 0px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* ---------- Breakpoints (prototype: 560 / 860, then wide screens) ---------- */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 35rem; /* 560px */
+  --breakpoint-md: 53.75rem; /* 860px */
+  --breakpoint-lg: 72.5rem; /* 1160px, content max width */
+  --breakpoint-xl: 90rem; /* 1440px */
+
+  /* ---------- Fonts (next/font variables set in app/fonts.ts) ---------- */
+  --font-*: initial;
+  --font-display: var(--font-della-respira), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-karla), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* ---------- Text styles (Figma) ---------- */
+  --text-*: initial;
+  --text-display-xl: 88px;
+  --text-display-xl--line-height: 1;
+  --text-display-xl--letter-spacing: -0.015em;
+  --text-display-l: 64px;
+  --text-display-l--line-height: 1.04;
+  --text-display-l--letter-spacing: -0.01em;
+  --text-display-m: 44px;
+  --text-display-m--line-height: 1.1;
+  --text-display-m--letter-spacing: -0.005em;
+  --text-display-s: 32px;
+  --text-display-s--line-height: 1.18;
+  --text-title: 24px;
+  --text-title--line-height: 1.25;
+  /* « Accent » (DM Mono 13px, uppercase) is the `text-accent` utility in globals.css,
+     since a --text-* token cannot carry the font family and the case. */
+  --text-body-l: 20px;
+  --text-body-l--line-height: 1.55;
+  --text-body-m: 17px;
+  --text-body-m--line-height: 1.55;
+  --text-body-s: 15px;
+  --text-body-s--line-height: 1.5;
+  --text-button-m: 16px;
+  --text-button-m--line-height: 1.2;
+  --text-button-s: 14px;
+  --text-button-s--line-height: 1.2;
+  --text-label-m: 14px;
+  --text-label-m--line-height: 1.3;
+  --text-label-s: 12px;
+  --text-label-s--line-height: 1.3;
+  --text-label-s--letter-spacing: 0.02em;
+}
+
+:root {
+  /* Figma Spacing collection, for CSS modules */
+  --space-0: 0px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-128: 128px;
+
+  /* Pattern paper grid: rust/500 at 7% (24px) and 14% (120px) */
+  --grid-minor: rgb(188 58 27 / 0.07);
+  --grid-major: rgb(188 58 27 / 0.14);
+
+  /* Measuring tape width (22px under 560px), 1 cm = 38 px of page */
+  --tape: 34px;
+  --px-per-cm: 38px;
+}
+
+@media (max-width: 559.98px) {
+  :root {
+    --tape: 22px;
+  }
+}

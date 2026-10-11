@@ -1,0 +1,56 @@
+.eyebrow {
+  margin: 0;
+  color: var(--color-text-accent);
+}
+
+.title {
+  margin: 10px 0 14px;
+  font: 400 clamp(36px, 5.2vw, 64px)/1.05 var(--font-display);
+}
+
+.lead {
+  max-width: 58ch;
+  margin: 0 0 40px;
+  color: var(--color-text-secondary);
+}
+
+/* A pattern sheet, like the fabric card: surface, ink edge, dashed seam */
+.sheet {
+  position: relative;
+  display: grid;
+  gap: 32px;
+  padding: 40px;
+  background: var(--color-bg-surface);
+  box-shadow: inset 0 0 0 1.5px var(--color-border-inverse);
+}
+
+.sheet::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--color-border-accent);
+  pointer-events: none;
+}
+
+.sheet h2 {
+  margin: 0 0 8px;
+  font: 400 var(--text-title) / var(--text-title--line-height) var(--font-display);
+}
+
+.sheet p {
+  margin: 0 0 4px;
+  overflow-wrap: anywhere;
+}
+
+.sheet a {
+  color: var(--color-text-accent);
+  text-decoration: underline dashed;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 559.98px) {
+  .sheet {
+    gap: 28px;
+    padding: 28px 22px;
+  }
+}
