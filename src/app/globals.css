@@ -43,6 +43,21 @@
   }
 }
 
+/* Home intro state, set on <html> by the pre-paint script then by IntroProvider:
+   "on" = the shirt is on screen (page locked, nav hidden so the V only reveals the
+   title), "seen" = no intro. */
+html[data-intro="on"] {
+  overflow: hidden;
+}
+
+html[data-intro="on"] [data-site-nav] {
+  visibility: hidden;
+}
+
+html[data-intro="seen"] #intro {
+  display: none;
+}
+
 /* Figma « Accent »: section eyebrows only (see tokens.css) */
 @utility text-accent {
   font-family: var(--font-mono);

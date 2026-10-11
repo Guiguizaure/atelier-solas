@@ -13,7 +13,7 @@ const LINKS = [
 /** Fixed top bar of the paper pages (home, legal notice, 404). Section links hide under 860px. */
 export function SiteNav() {
   return (
-    <header className={styles.nav}>
+    <header className={styles.nav} data-site-nav>
       <Link className={styles.brand} href="/">
         <span className={styles.mark} aria-hidden="true">
           S

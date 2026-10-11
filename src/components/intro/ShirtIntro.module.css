@@ -1,0 +1,209 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.shirt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Topstitching: blush thread, dashed */
+.stitch {
+  fill: none;
+  stroke: var(--color-illustration-blush);
+  stroke-opacity: 0.7;
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+/* Collars: darker linen with the stitch outline */
+.collar {
+  fill: url(#linen-collar);
+  stroke: var(--color-illustration-blush);
+  stroke-opacity: 0.7;
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.pocketEdge {
+  stroke: var(--color-shirt-weave);
+  stroke-opacity: 0.6;
+  stroke-width: 1;
+}
+
+.pocketStitch {
+  fill: none;
+  stroke: var(--color-illustration-blush);
+  stroke-opacity: 0.75;
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
+.pocketMark {
+  fill: var(--color-cream);
+  fill-opacity: 0.92;
+  font-family: var(--font-display);
+}
+
+.hole {
+  stroke: var(--color-shirt-buttonhole);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* ---------- Top bar ---------- */
+.bar {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: calc(env(safe-area-inset-top, 0px) + 18px) 20px 0;
+  pointer-events: none;
+}
+
+.bar > * {
+  pointer-events: auto;
+}
+
+.wordmark {
+  display: grid;
+  line-height: 1.05;
+  color: var(--color-cream);
+}
+
+.wordmark b {
+  font: 400 24px/1 var(--font-display);
+}
+
+.wordmark span {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Shirt buttons ---------- */
+/* Position comes from the `translate` property (set by the geometry code), so
+   `transform` stays free for the hover wobble and the undone tilt. */
+.button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: radial-gradient(
+    circle at 38% 32%,
+    var(--color-button-highlight) 0 35%,
+    var(--color-cream) 36% 70%,
+    var(--color-button-shade) 100%
+  );
+  box-shadow:
+    0 2px 0 rgb(29 29 27 / 0.25),
+    0 4px 10px rgb(29 29 27 / 0.3),
+    inset 0 0 0 2px rgb(29 29 27 / 0.08);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1.3);
+}
+
+/* 44px touch target around the 36px button */
+.button::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+}
+
+.button svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.button:hover {
+  transform: scale(1.12) rotate(-8deg);
+}
+
+.button:focus-visible {
+  outline-color: var(--color-cream);
+  outline-offset: 6px;
+}
+
+.next::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--color-cream);
+  animation: ring 2.4s linear infinite;
+}
+
+.undone,
+.undone:hover {
+  transform: rotate(32deg) scale(0.94);
+  cursor: default;
+}
+
+@keyframes ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Hint ---------- */
+.hint {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 5%);
+  transform: translateX(-50%);
+  padding: 3px;
+  border-radius: 2px;
+  background: var(--color-cream);
+  color: var(--color-text-primary);
+  box-shadow: 0 6px 18px rgb(29 29 27 / 0.25);
+  white-space: nowrap;
+}
+
+.hint > span {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px dashed var(--color-border-accent);
+}
+
+.count {
+  color: var(--color-text-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 559.98px) {
+  .wordmark b {
+    font-size: 20px;
+  }
+
+  .wordmark span {
+    display: none;
+  }
+
+  .hint > span {
+    gap: 10px;
+    padding: 8px 10px;
+  }
+}

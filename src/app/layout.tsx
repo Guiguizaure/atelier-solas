@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={fontVariables}>
+    // suppressHydrationWarning: the home pre-paint script sets data-intro and --vh on <html>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );
