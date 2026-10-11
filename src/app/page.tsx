@@ -1,6 +1,9 @@
 import { CreditLine } from "@/components/chrome/CreditLine";
 import { SiteNav } from "@/components/chrome/SiteNav";
+import { CutLine } from "@/components/home/CutLine";
 import { Hero } from "@/components/home/Hero";
+import { MeasuringTape } from "@/components/home/MeasuringTape";
+import { Wrap } from "@/components/home/Section";
 import { IntroProvider, SiteGate } from "@/components/intro/IntroProvider";
 import { INTRO_PREPAINT, SITE_INERT } from "@/components/intro/intro-prepaint";
 import { ShirtIntro } from "@/components/intro/ShirtIntro";
@@ -17,10 +20,20 @@ export default function Home() {
       <SiteGate>
         <FabricDefs />
         <SiteNav />
+        <MeasuringTape />
         <main>
           <Hero />
-          {/* Sections land in commits 4–8 */}
-          <div id="how" className="h-[60vh]" />
+          <Wrap>
+            {/* Sections land in commits 5–8 */}
+            <CutLine label="How it works" />
+            <div id="how" className="h-[60vh]" />
+            <CutLine label="The rail" />
+            <div id="rail" className="h-[60vh]" />
+            <CutLine label="Fabrics" />
+            <div id="fabrics" className="h-[60vh]" />
+            <CutLine label="Contact" />
+            <div id="label" className="h-[30vh]" />
+          </Wrap>
         </main>
         <CreditLine className="pb-10" />
       </SiteGate>

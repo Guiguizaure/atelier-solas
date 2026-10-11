@@ -3,6 +3,7 @@
 import { useEffectEvent, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
 import { LabelButton } from "@/components/chrome/LabelButton";
 import { ArrowRight } from "@/components/svg/icons";
+import { prefersReducedMotion } from "@/lib/motion";
 import { useIntro } from "./IntroProvider";
 import { SHIRT, collectShirt } from "./shirt-geometry";
 import { ShirtMotion } from "./shirt-motion";
@@ -13,8 +14,6 @@ const NONE = SHIRT.ROWS.map(() => false);
 const ALL = SHIRT.ROWS.map(() => true);
 /** Pause between the last button and the full opening (prototype) */
 const OPEN_DELAY_MS = 420;
-
-const prefersReducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** Remounted on each replay, so every replay starts from a clean state. */
 export function ShirtIntro() {

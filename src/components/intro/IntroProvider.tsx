@@ -63,12 +63,12 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   return <IntroContext value={{ phase, replays, finish, replay }}>{children}</IntroContext>;
 }
 
-/** The site behind the shirt: inert while the intro plays. */
+/** The site behind the shirt: inert while the intro plays. Positioned: the tape spans it. */
 export function SiteGate({ children }: { children: ReactNode }) {
   const { phase } = useIntro();
   return (
     // The pre-paint script may already have set `inert`: React takes it over after hydration
-    <div id="site" inert={phase === "intro" ? true : undefined} suppressHydrationWarning>
+    <div id="site" className="relative" inert={phase === "intro" ? true : undefined} suppressHydrationWarning>
       {children}
     </div>
   );

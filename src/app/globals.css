@@ -44,13 +44,14 @@
 }
 
 /* Home intro state, set on <html> by the pre-paint script then by IntroProvider:
-   "on" = the shirt is on screen (page locked, nav hidden so the V only reveals the
-   title), "seen" = no intro. */
+   "on" = the shirt is on screen (page locked, nav and tape hidden so the V only
+   reveals the title), "seen" = no intro. */
 html[data-intro="on"] {
   overflow: hidden;
 }
 
-html[data-intro="on"] [data-site-nav] {
+html[data-intro="on"] [data-site-nav],
+html[data-intro="on"] [data-tape] {
   visibility: hidden;
 }
 
