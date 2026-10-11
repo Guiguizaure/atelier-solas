@@ -8,3 +8,7 @@
 /_next/static/*
   ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
+
+# The production copy on pages.dev stays out of search results: only the custom domain is indexed
+https://atelier-solas.pages.dev/*
+  X-Robots-Tag: noindex
