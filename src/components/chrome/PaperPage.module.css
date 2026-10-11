@@ -1,0 +1,16 @@
+/* Below the fixed nav; same left clearance as the home content */
+.main {
+  max-width: calc(860px + var(--tape) + 40px);
+  margin-inline: auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 128px) 20px 64px calc(var(--tape) + 20px);
+}
+
+.credit {
+  padding: 0 20px 40px calc(var(--tape) + 20px);
+}
+
+@media (max-width: 559.98px) {
+  .main {
+    padding: calc(env(safe-area-inset-top, 0px) + 112px) 16px 48px calc(var(--tape) + 14px);
+  }
+}

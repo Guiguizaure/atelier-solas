@@ -55,7 +55,9 @@ html[data-intro="on"] [data-tape] {
   visibility: hidden;
 }
 
-html[data-intro="seen"] #intro {
+/* Not "on" covers "seen" and a client-side arrival from another page (no attribute
+   yet): the shirt never flashes before IntroProvider has decided. */
+html:not([data-intro="on"]) #intro {
   display: none;
 }
 

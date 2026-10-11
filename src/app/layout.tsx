@@ -3,7 +3,7 @@ import { fontVariables } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Atelier Solas — Made to measure, Marseille",
+  title: { default: "Atelier Solas — Made to measure, Marseille", template: "%s · Atelier Solas" },
   description:
     "A fictional made-to-measure atelier in Marseille. Concept and design by Guillaume Salle.",
 };

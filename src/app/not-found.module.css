@@ -1,0 +1,45 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-text-accent);
+}
+
+.title {
+  margin: 10px 0 14px;
+  font: 400 clamp(36px, 5.2vw, 64px)/1.05 var(--font-display);
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 46ch;
+  margin: 0 0 32px;
+  color: var(--color-text-secondary);
+}
+
+/* The missing piece: outline only, tilted */
+.piece {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  justify-self: center;
+  transform: rotate(-4deg);
+  opacity: 0.85;
+}
+
+@media (max-width: 859.98px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .piece {
+    max-width: 200px;
+    justify-self: start;
+  }
+}
