@@ -1,5 +1,5 @@
-import { CreditLine } from "@/components/chrome/CreditLine";
 import { SiteNav } from "@/components/chrome/SiteNav";
+import { CareLabel } from "@/components/home/CareLabel";
 import { CutLine } from "@/components/home/CutLine";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
@@ -27,7 +27,6 @@ export default function Home() {
         <main>
           <Hero />
           <Wrap>
-            {/* The contact label lands in commit 8 */}
             <CutLine label="How it works" />
             <HowItWorks />
             <CutLine label="The rail" />
@@ -35,10 +34,9 @@ export default function Home() {
             <CutLine label="Fabrics" />
             <SwatchBook />
             <CutLine label="Contact" />
-            <div id="label" className="h-[30vh]" />
           </Wrap>
         </main>
-        <CreditLine className="pb-10" />
+        <CareLabel />
       </SiteGate>
       <script dangerouslySetInnerHTML={{ __html: SITE_INERT }} />
     </IntroProvider>

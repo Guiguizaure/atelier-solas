@@ -1,0 +1,56 @@
+.footer {
+  scroll-margin-top: 70px;
+}
+
+.care {
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+  padding-block: 40px 80px;
+}
+
+/* Cream tape with a V cut at the bottom, as a sewn-in label */
+.label {
+  width: min(432px, 100%);
+  padding: 6px;
+  background: var(--color-cream);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 14px), 0 100%);
+}
+
+.stitch {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 26px 24px 40px;
+  border: 1px dashed var(--color-border-accent);
+  text-align: center;
+}
+
+.small {
+  font-size: 11px;
+  color: var(--color-text-accent);
+}
+
+.small.ink {
+  color: var(--color-text-primary);
+}
+
+.name {
+  margin: 0;
+  font: 400 30px/1 var(--font-display);
+}
+
+.icons {
+  display: flex;
+  gap: 14px;
+}
+
+.icons svg {
+  width: 30px;
+  height: 30px;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+}
