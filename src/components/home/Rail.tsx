@@ -33,48 +33,57 @@ export function Rail() {
 /**
  * A garment that turns over to show its pattern sheet. The toggle covers the whole
  * card; the link on the back sits above it and only takes focus once turned over.
+ * Two nested layers so the two motions never share a transform: the outer one swings
+ * on hover, the inner one turns over.
  */
 function Garment({ model }: { model: Model }) {
   const [flipped, setFlipped] = useState(false);
+  // A click stops the swing dead; the next hover plays it again
+  const [still, setStill] = useState(false);
   const fabric = FABRICS.find((f) => f.id === model.sample)!;
 
   return (
-    <li className={styles.garment}>
+    <li className={styles.garment} onPointerEnter={() => setStill(false)}>
       <button
         type="button"
         className={styles.toggle}
         aria-pressed={flipped}
         aria-label={`${model.name}, turn over to read its pattern sheet`}
-        onClick={() => setFlipped((f) => !f)}
+        onClick={() => {
+          setFlipped((f) => !f);
+          setStill(true);
+        }}
       />
-      <div className={flipped ? `${styles.flip} ${styles.flipped}` : styles.flip}>
-        <div className={`${styles.face} ${styles.front}`} aria-hidden="true">
-          <GarmentOnHanger model={model} className={styles.drawing} />
-          <span className={`mono ${styles.tag}`}>{model.name}</span>
-        </div>
-        <div className={`${styles.face} ${styles.back}`}>
-          <span className={`mono ${styles.sheet}`}>Model {model.number} · pattern sheet</span>
-          <h3 className={styles.name}>{model.name}</h3>
-          <dl className={styles.facts}>
-            <dt>Sample in</dt>
-            <dd>
-              {fabric.name}, {fabric.colour.toLowerCase()}
-            </dd>
-            <dt>Fittings</dt>
-            <dd>{model.fittings}</dd>
-            <dt>Lead time</dt>
-            <dd>{model.leadWeeks} weeks</dd>
-            <dt>From</dt>
-            <dd>{formatPrice(model.priceFrom)}</dd>
-          </dl>
-          <Link
-            href={`/commission?model=${model.id}`}
-            className={`mono ${styles.go}`}
-            tabIndex={flipped ? undefined : -1}
-          >
-            Draft this pattern
-            <ArrowRight />
-          </Link>
+      <div className={still ? `${styles.swing} ${styles.still}` : styles.swing}>
+        <div className={flipped ? `${styles.flip} ${styles.flipped}` : styles.flip}>
+          <div className={styles.face} aria-hidden="true">
+            <GarmentOnHanger model={model} className={styles.drawing} />
+            <span className={`mono ${styles.tag}`}>{model.name}</span>
+          </div>
+          <div className={`${styles.face} ${styles.back}`}>
+            <span className={`mono ${styles.sheet}`}>Model {model.number} · pattern sheet</span>
+            <h3 className={styles.name}>{model.name}</h3>
+            <dl className={styles.facts}>
+              <dt>Sample in</dt>
+              <dd>
+                {fabric.name}, {fabric.colour.toLowerCase()}
+              </dd>
+              <dt>Fittings</dt>
+              <dd>{model.fittings}</dd>
+              <dt>Lead time</dt>
+              <dd>{model.leadWeeks} weeks</dd>
+              <dt>From</dt>
+              <dd>{formatPrice(model.priceFrom)}</dd>
+            </dl>
+            <Link
+              href={`/commission?model=${model.id}`}
+              className={`mono ${styles.go}`}
+              tabIndex={flipped ? undefined : -1}
+            >
+              Draft this pattern
+              <ArrowRight />
+            </Link>
+          </div>
         </div>
       </div>
     </li>
