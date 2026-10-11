@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight } from "@/components/svg/icons";
 import { GarmentOnHanger } from "@/components/svg/Garment";
+import { commissionHref } from "@/config/site";
 import { FABRICS } from "@/data/fabrics";
 import { MODELS, formatPrice, type Model } from "@/data/models";
 import { Section } from "./Section";
@@ -76,7 +77,7 @@ function Garment({ model }: { model: Model }) {
               <dd>{formatPrice(model.priceFrom)}</dd>
             </dl>
             <Link
-              href={`/commission?model=${model.id}`}
+              href={commissionHref(model.id)}
               className={`mono ${styles.go}`}
               tabIndex={flipped ? undefined : -1}
             >

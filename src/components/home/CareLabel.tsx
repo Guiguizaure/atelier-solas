@@ -1,4 +1,5 @@
 import { CreditLine } from "@/components/chrome/CreditLine";
+import { COMMISSIONS_OPEN } from "@/config/site";
 import { CopyEmail } from "./CopyEmail";
 import { ReplayButton } from "./ReplayButton";
 import { Wrap } from "./Section";
@@ -21,6 +22,7 @@ export function CareLabel() {
               <span className={`mono ${styles.small} ${styles.ink}`}>100% made to measure</span>
               <CareIcons />
               <p className={styles.text}>Marseille, by appointment</p>
+              {!COMMISSIONS_OPEN && <span className={`mono ${styles.small}`}>Commissions open soon</span>}
               <CopyEmail email={EMAIL} />
             </div>
           </div>

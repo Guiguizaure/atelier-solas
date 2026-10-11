@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "@/components/svg/icons";
+import { commissionHref } from "@/config/site";
 import { LabelButton } from "./LabelButton";
 import styles from "./SiteNav.module.css";
 
@@ -26,7 +27,7 @@ export function SiteNav() {
             {l.label}
           </Link>
         ))}
-        <LabelButton href="/commission" compact icon={<ArrowRight />}>
+        <LabelButton href={commissionHref()} compact icon={<ArrowRight />}>
           Start your pattern
         </LabelButton>
       </nav>
