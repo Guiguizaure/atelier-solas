@@ -1,0 +1,170 @@
+.book {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.fan {
+  position: relative;
+  height: 340px;
+}
+
+/* Each swatch pivots on its bottom-left corner; --a is its angle in the fan */
+.swatch {
+  position: absolute;
+  left: 6%;
+  bottom: 20px;
+  width: 190px;
+  height: 240px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  transform-origin: 20% 100%;
+  transform: rotate(var(--a));
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.1),
+    filter 0.3s;
+  clip-path: var(--pinked);
+  filter: drop-shadow(0 4px 6px rgb(29 29 27 / 0.2));
+}
+
+.fan:hover .swatch,
+.fan:focus-within .swatch {
+  transform: rotate(calc(var(--a) * 1.7));
+}
+
+.fan .swatch[aria-pressed="true"] {
+  transform: rotate(calc(var(--a) * 1.7)) translateY(-22px);
+}
+
+/* The pinked clip-path cuts any outline: the focus ring goes on the tab instead, and the
+   focused swatch comes to the front so the ring is not hidden by the next ones */
+.swatch:focus-visible {
+  z-index: 10 !important;
+  outline: none;
+}
+
+.tab {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 4px 8px;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.swatch:focus-visible .tab {
+  outline: 2px dashed var(--color-text-accent);
+  outline-offset: 2px;
+}
+
+/* Fabrics, as woven: same motifs as the SVG patterns in FabricDefs */
+.washed-linen {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-illustration-blush) 0 3px,
+    var(--color-illustration-rust) 3px 12px
+  );
+}
+
+.cotton-gingham {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-illustration-violet) 45%, transparent) 50%, transparent 0) 0 0 / 16px 16px,
+    linear-gradient(color-mix(in srgb, var(--color-illustration-violet) 45%, transparent) 50%, transparent 0) 0 0 / 16px 16px,
+    var(--color-cream);
+}
+
+.silk-crepe {
+  background:
+    radial-gradient(var(--color-illustration-blush) 1.6px, transparent 2.2px) 0 0 / 14px 14px,
+    var(--color-illustration-magenta);
+}
+
+.boiled-wool {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-fabric-charcoal-twill) 0 2px,
+    var(--color-fabric-charcoal) 2px 6px
+  );
+}
+
+.linen-canvas {
+  background: repeating-linear-gradient(
+    0deg,
+    var(--color-fabric-saffron-weft) 0 1px,
+    var(--color-illustration-orange) 1px 5px
+  );
+}
+
+.cotton-voile {
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-white) 40%, transparent) 0 1px,
+    var(--color-illustration-blush) 1px 6px
+  );
+}
+
+/* Fabric details */
+.card {
+  position: relative;
+  padding: 28px;
+  background: var(--color-bg-surface);
+  box-shadow: inset 0 0 0 1.5px var(--color-border-inverse);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--color-border-accent);
+  pointer-events: none;
+}
+
+.number {
+  display: block;
+  color: var(--color-text-accent);
+}
+
+.name {
+  margin: 8px 0 16px;
+  font: 400 34px/1.1 var(--font-display);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 18px;
+  margin: 0 0 20px;
+}
+
+.facts dt {
+  color: var(--color-text-secondary);
+}
+
+.facts dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 859.98px) {
+  .book {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 559.98px) {
+  .fan {
+    height: 290px;
+  }
+
+  .swatch {
+    left: 4%;
+    width: 150px;
+    height: 200px;
+  }
+}

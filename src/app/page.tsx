@@ -6,6 +6,7 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { MeasuringTape } from "@/components/home/MeasuringTape";
 import { Rail } from "@/components/home/Rail";
 import { Wrap } from "@/components/home/Section";
+import { SwatchBook } from "@/components/home/SwatchBook";
 import { IntroProvider, SiteGate } from "@/components/intro/IntroProvider";
 import { INTRO_PREPAINT, SITE_INERT } from "@/components/intro/intro-prepaint";
 import { ShirtIntro } from "@/components/intro/ShirtIntro";
@@ -26,13 +27,13 @@ export default function Home() {
         <main>
           <Hero />
           <Wrap>
-            {/* Sections land in commits 7–8 */}
+            {/* The contact label lands in commit 8 */}
             <CutLine label="How it works" />
             <HowItWorks />
             <CutLine label="The rail" />
             <Rail />
             <CutLine label="Fabrics" />
-            <div id="fabrics" className="h-[60vh]" />
+            <SwatchBook />
             <CutLine label="Contact" />
             <div id="label" className="h-[30vh]" />
           </Wrap>
