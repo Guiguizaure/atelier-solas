@@ -2,6 +2,12 @@
 export const SITE_URL = "https://atelier.webjuno.com";
 
 /**
+ * Launch switch. While false, every page carries `noindex` and robots.txt disallows
+ * everything. Turned on in the launch commit only.
+ */
+export const INDEXABLE = false;
+
+/**
  * The commission configurator is live. Until it is (commit 9), « Start your pattern » and
  * « Draft this pattern » lead to the contact label, which says commissions open soon.
  */

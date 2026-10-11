@@ -5,6 +5,8 @@ import { ArrowLeft } from "@/components/svg/icons";
 import { PatternPiece } from "@/components/svg/PatternPiece";
 import styles from "./not-found.module.css";
 
+// Next adds its own noindex here too; this one keeps the layout's « index » (after
+// launch) from reaching the 404
 export const metadata: Metadata = {
   title: "Page not found",
   robots: { index: false },

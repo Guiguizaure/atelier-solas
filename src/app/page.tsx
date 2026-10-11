@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SiteNav } from "@/components/chrome/SiteNav";
 import { CareLabel } from "@/components/home/CareLabel";
 import { CutLine } from "@/components/home/CutLine";
@@ -11,6 +12,10 @@ import { IntroProvider, SiteGate } from "@/components/intro/IntroProvider";
 import { INTRO_PREPAINT, SITE_INERT } from "@/components/intro/intro-prepaint";
 import { ShirtIntro } from "@/components/intro/ShirtIntro";
 import { FabricDefs } from "@/components/svg/FabricDefs";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (
