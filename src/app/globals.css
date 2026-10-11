@@ -43,7 +43,16 @@
   }
 }
 
-/* Small uppercase mono label used across the prototype */
+/* Figma « Accent »: section eyebrows only (see tokens.css) */
+@utility text-accent {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Prototype small label: measurements, tags, counters, pattern markings only */
 @utility mono {
   font-family: var(--font-mono);
   font-size: 12px;

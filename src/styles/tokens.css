@@ -7,10 +7,13 @@
  * Illustration tokens below the semantic ones are not Figma variables: they come from
  * the « Déboutonné » prototype (shirt linen, buttons, tape, fabric shades).
  *
- * Known gaps with the prototype, kept on purpose:
- * - Della Respira only ships Regular; Figma display styles say 500, we render 400.
- * - The prototype's small mono labels are 12px / .08em; Figma « Accent » is 13px / 6%.
- *   Both exist: `text-accent` (Figma) and `.mono` (prototype, in globals.css).
+ * Two mono styles, one role each (never swapped case by case), both in globals.css:
+ * - `text-accent` (Figma « Accent », DM Mono 13px / 6%, uppercase): section eyebrows only.
+ * - `.mono` (prototype, DM Mono 12px / .08em, uppercase): small labels only —
+ *   measurements, tags, counters, pattern markings.
+ *
+ * Known gap with Figma: Della Respira only ships Regular; Figma display styles say 500,
+ * we render 400.
  */
 
 @theme {
@@ -61,6 +64,7 @@
 
   /* ---------- Illustration · prototype ---------- */
   --color-cream: #f4ead8; /* label buttons, shirt buttons, care label */
+  --color-white: #ffffff; /* voile sheen only */
   --color-shirt-linen: #b8381a;
   --color-shirt-stripe: #e8866a;
   --color-shirt-weave: #8e2914;
@@ -117,9 +121,8 @@
   --text-display-s--line-height: 1.18;
   --text-title: 24px;
   --text-title--line-height: 1.25;
-  --text-accent: 13px;
-  --text-accent--line-height: 1.4;
-  --text-accent--letter-spacing: 0.06em;
+  /* « Accent » (DM Mono 13px, uppercase) is the `text-accent` utility in globals.css,
+     since a --text-* token cannot carry the font family and the case. */
   --text-body-l: 20px;
   --text-body-l--line-height: 1.55;
   --text-body-m: 17px;
