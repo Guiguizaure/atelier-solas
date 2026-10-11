@@ -2,6 +2,7 @@ import { CreditLine } from "@/components/chrome/CreditLine";
 import { SiteNav } from "@/components/chrome/SiteNav";
 import { CutLine } from "@/components/home/CutLine";
 import { Hero } from "@/components/home/Hero";
+import { HowItWorks } from "@/components/home/HowItWorks";
 import { MeasuringTape } from "@/components/home/MeasuringTape";
 import { Wrap } from "@/components/home/Section";
 import { IntroProvider, SiteGate } from "@/components/intro/IntroProvider";
@@ -24,9 +25,9 @@ export default function Home() {
         <main>
           <Hero />
           <Wrap>
-            {/* Sections land in commits 5–8 */}
+            {/* Sections land in commits 6–8 */}
             <CutLine label="How it works" />
-            <div id="how" className="h-[60vh]" />
+            <HowItWorks />
             <CutLine label="The rail" />
             <div id="rail" className="h-[60vh]" />
             <CutLine label="Fabrics" />
