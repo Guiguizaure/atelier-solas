@@ -9,7 +9,6 @@ import styles from "./SwatchBook.module.css";
 
 // Left to right in the open fan; the leftmost lies on top
 const FAN: FabricId[] = ["washed-linen", "cotton-gingham", "silk-crepe", "boiled-wool", "linen-canvas", "cotton-voile"];
-const SPREAD_DEG = 8.5;
 
 /** Pinking-shear edges: a zigzag polygon, 22 teeth per side */
 const PINKED = (() => {
@@ -34,20 +33,16 @@ export function SwatchBook() {
       title="Pick from real fabric"
       lead="Twelve natural fabrics, six of them shown here. Ask for up to three swatches and we post them to you, free, before you decide."
     >
-      <SwatchPicker layout="front" />
+      <SwatchPicker />
     </Section>
   );
 }
 
 /**
- * Lab variants (/lab/swatches), one to keep:
- * - "front": the chosen swatch lifts and comes to the front of the fan
- * - "aside": the chosen swatch leaves the fan and lies, large, next to the fabric card
+ * The open fan as a radio group (arrow keys move the choice). The chosen swatch leaves
+ * the fan and lies, large, next to its fabric card.
  */
-export type SwatchLayout = "front" | "aside";
-
-/** The open fan as a radio group (arrow keys move the choice) and the fabric card. */
-export function SwatchPicker({ layout }: { layout: SwatchLayout }) {
+function SwatchPicker() {
   const [selected, setSelected] = useState<FabricId>(FAN[0]);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const fabric = fabricOf(selected);
@@ -71,7 +66,7 @@ export function SwatchPicker({ layout }: { layout: SwatchLayout }) {
   };
 
   return (
-    <div className={`${styles.book} ${styles[layout]}`} style={{ "--pinked": PINKED } as CSSProperties}>
+    <div className={styles.book} style={{ "--pinked": PINKED } as CSSProperties}>
       <div className={styles.fan} role="radiogroup" aria-label="Fabric swatches">
         {FAN.map((id, i) => {
           const f = fabricOf(id);
@@ -87,7 +82,7 @@ export function SwatchPicker({ layout }: { layout: SwatchLayout }) {
               aria-checked={checked}
               tabIndex={checked ? 0 : -1}
               className={`${styles.swatch} ${styles[id]}`}
-              style={{ "--a": `${i * SPREAD_DEG}deg`, "--z": FAN.length - i } as CSSProperties}
+              style={{ "--i": i, "--z": FAN.length - i } as CSSProperties}
               aria-label={`${f.name}, ${f.colour.toLowerCase()}`}
               onClick={() => setSelected(id)}
               onKeyDown={(e) => onKeyDown(e, i)}
@@ -101,12 +96,10 @@ export function SwatchPicker({ layout }: { layout: SwatchLayout }) {
       </div>
 
       <div className={styles.detail}>
-        {layout === "aside" && (
-          // Keyed: each new choice lands with its own entrance
-          <div key={selected} className={`${styles.big} ${styles[selected]}`} aria-hidden="true">
-            <span className={styles.tab}>{fabric.colour}</span>
-          </div>
-        )}
+        {/* Keyed: each new choice lands with its own entrance */}
+        <div key={selected} className={`${styles.big} ${styles[selected]}`} aria-hidden="true">
+          <span className={styles.tab}>{fabric.colour}</span>
+        </div>
         <div className={styles.card} aria-live="polite">
           <span className={`mono ${styles.number}`}>Swatch {fabric.swatchNo} of 12</span>
           <h3 className={styles.name}>{fabric.name}</h3>

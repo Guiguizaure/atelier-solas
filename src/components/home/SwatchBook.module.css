@@ -1,23 +1,27 @@
+/* Fan on the left, the chosen swatch and its card on the right; stacked below 1160px */
 .book {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 500px) minmax(0, 1fr);
   gap: 48px;
   align-items: center;
 }
 
-/* Room for the open fan: its last swatch dips ~100px below the pivot, the chosen one
-   rises 28px above */
+/* Room for the open fan: the last swatch dips ~85px below the pivots, the one taken
+   out rises 36px above */
 .fan {
   position: relative;
-  height: 400px;
+  height: 380px;
+  --step: 40px;
+  --angle: 6.5deg;
 }
 
-/* Always open. Each swatch pivots on its bottom-left corner: --a is its angle in the
-   fan, --z its place in the pile (the leftmost on top). */
+/* Always open, wide: each swatch is both shifted right and turned on its bottom-left
+   corner, so every fabric shows a strip of at least --step to click. --i is its place
+   from the left, --z its place in the pile (the leftmost on top). */
 .swatch {
   position: absolute;
-  left: 6%;
-  bottom: 110px;
+  left: 0;
+  bottom: 92px;
   z-index: var(--z);
   width: 190px;
   height: 240px;
@@ -25,7 +29,7 @@
   border: 0;
   cursor: pointer;
   transform-origin: 20% 100%;
-  transform: rotate(var(--a));
+  transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)));
   transition:
     transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1.1),
     opacity 0.3s;
@@ -36,7 +40,8 @@
 @media (hover: hover) {
   .swatch:hover {
     z-index: 10;
-    transform: rotate(var(--a)) translateY(-14px);
+    transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)))
+      translateY(-14px);
   }
 }
 
@@ -44,7 +49,17 @@
 .swatch:focus-visible {
   z-index: 10;
   outline: none;
-  transform: rotate(var(--a)) translateY(-14px);
+  transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)))
+    translateY(-14px);
+}
+
+/* In the fan the colour tab runs down the right edge: the strip a swatch shows past
+   the one above it is narrow, a vertical tab always fits */
+.fan .tab {
+  left: auto;
+  right: 8px;
+  padding: 8px 4px;
+  writing-mode: vertical-rl;
 }
 
 .swatch:focus-visible .tab {
@@ -52,21 +67,19 @@
   outline-offset: 2px;
 }
 
-/* A · the chosen swatch comes to the front, lifted and half straightened */
+/* The chosen swatch has left the fan: only its faded place remains, under the others
+   so it never takes their clicks. Still focusable: it holds the radio group's tab stop. */
 .fan .swatch[aria-checked="true"] {
-  z-index: 20;
-  transform: rotate(calc(var(--a) * 0.5)) translateY(-28px);
-}
-
-/* B · the chosen swatch has left the fan: only its faded place remains */
-.aside .fan .swatch[aria-checked="true"] {
-  z-index: var(--z);
+  z-index: 0;
   opacity: 0.22;
-  transform: rotate(var(--a)) translateY(-36px);
+  transform: translateX(calc(var(--i) * var(--step))) rotate(calc(var(--i) * var(--angle)))
+    translateY(-36px);
 }
 
-.aside .fan .swatch[aria-checked="true"]:focus-visible {
-  opacity: 0.6;
+/* Keyboard focus brings it up so the ring shows, faint enough not to veil the others */
+.fan .swatch[aria-checked="true"]:focus-visible {
+  z-index: 10;
+  opacity: 0.45;
 }
 
 .tab {
@@ -127,8 +140,8 @@
   );
 }
 
-/* B · the chosen swatch, large, beside the card */
-.aside .detail {
+/* The chosen swatch, large, beside the card */
+.detail {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 28px;
@@ -142,6 +155,7 @@
   clip-path: var(--pinked);
   animation: land 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.1);
 }
+
 
 @keyframes land {
   from {
@@ -192,18 +206,27 @@
   font-variant-numeric: tabular-nums;
 }
 
-.aside {
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
-}
-
-@media (max-width: 859.98px) {
+@media (max-width: 1159.98px) {
   .book {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
+}
 
-  /* B · on one column the large swatch becomes a strip above the card */
-  .aside .detail {
+/* Phones: a smaller fan; the large swatch becomes a strip above the card */
+@media (max-width: 559.98px) {
+  .fan {
+    height: 290px;
+    --step: 24px;
+  }
+
+  .swatch {
+    bottom: 64px;
+    width: 130px;
+    height: 175px;
+  }
+
+  .detail {
     grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
@@ -211,18 +234,5 @@
   .big {
     width: 100%;
     height: 120px;
-  }
-}
-
-@media (max-width: 559.98px) {
-  .fan {
-    height: 330px;
-  }
-
-  .swatch {
-    bottom: 92px;
-    left: 4%;
-    width: 150px;
-    height: 200px;
   }
 }
